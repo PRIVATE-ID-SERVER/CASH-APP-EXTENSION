@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cash App Account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Professional Cash App Style -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cash-green: #00d54b;
+      --cash-black: #101820;
+      --cash-gray: #f4f6fa;
+      --cash-border: #e7e8ea;
+    }
+    body {
+      background: var(--cash-gray);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      color: var(--cash-black);
+      min-height: 100vh;
+    }
+    /* Preloader styles */
+    #preloader {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--cash-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.5s;
+    }
+    #preloader .preloader-text {
+      color: #fff;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-shadow: 0 4px 24px #009d3360;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      user-select: none;
+      animation: popin 1.2s cubic-bezier(.18,.89,.32,1.28) forwards;
+    }
+    @keyframes popin {
+      0% { opacity: 0; transform: scale(0.8);}
+      50% { opacity: 1; transform: scale(1.07);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    /* Hide main app until preloader is gone */
+    .cash-container {
+      display: none;
+    }
+  </style>
+  <!-- Main Cash App CSS (as in previous answer, not repeated for brevity) -->
+  <style>
+    /* ... (Paste your previous .cash-container, .cash-header, etc styles here) ... */
+    /* The rest of the CSS from the previous cash-app-view.html should be included here */
+    /* Only the unique preloader styles are shown above for clarity */
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <span class="preloader-text">CASH APP</span>
+  </div>
+
+  <!-- Main Cash App Container -->
+  <div class="cash-container">
+
+    <!-- Header with Cash App logo and title -->
+    <div class="cash-header">
+      <img src="cash-app-logo.png" alt="Cash App Logo" class="cash-logo" />
+      <div class="cash-title">Cash App</div>
+      <div class="cash-subtitle">Personal Account</div>
+    </div>
+
+    <!-- Cash Balance Section -->
+    <div class="cash-balance-wrap">
+      <div class="cash-balance-label">Cash Balance</div>
+      <div class="cash-balance-amount" id="cash-balance-amount">$76,445.50</div>
+      <div class="cash-buttons">
+        <button class="cash-btn" id="deposit-btn"><i class="fa-solid fa-plus"></i> Add Cash</button>
+        <button class="cash-btn withdraw" id="withdraw-btn"><i class="fa-solid fa-arrow-up-from-bracket"></i> Cash Out</button>
+      </div>
+    </div>
+
+    <!-- Quick Actions (Send, Request, Activity) -->
+    <div class="cash-actions-row">
+      <div class="cash-action-item" title="Send">
+        <i class="fa-solid fa-paper-plane"></i>
+        Send
+      </div>
+      <div class="cash-action-item" title="Request">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        Request
+      </div>
+      <div class="cash-action-item" title="Activity">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        Activity
+      </div>
+    </div>
+
+    <!-- Recent Activity Table -->
+    <div class="recent-activity-wrap">
+      <div class="recent-activity-title">Recent Activity</div>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <span>
+            <span class="activity-type">Received</span>
+            <span class="activity-date">May 30</span>
+          </span>
+          <span class="activity-amount positive">+$3,000.00</span>
+        </li>
+        <li class="activity-item">
+          <span>
+            <span class="activity-type">Cash Out</span>
+            <span class="activity-date">May 28</span>
+          </span>
+          <span class="activity-amount negative">-$500.00</span>
+        </li>
+        <li class="activity-item">
+          <span>
+            <span class="activity-type">Add Cash</span>
+            <span class="activity-date">May 26</span>
+          </span>
+          <span class="activity-amount positive">+$1,200.00</span>
+        </li>
+        <li class="activity-item">
+          <span>
+            <span class="activity-type">Sent</span>
+            <span class="activity-date">May 23</span>
+          </span>
+          <span class="activity-amount negative">-$250.00</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Security Tip -->
+    <div class="security-tip">
+      <strong>Security Tip:</strong> Cash App Support will never ask for your PIN, sign-in code, or to send money. Never share sensitive info with anyone.
+    </div>
+
+    <!-- Footer image (optional, can be replaced with branding or QR code for Cash App tag) -->
+    <div class="footer-img-wrap">
+      <img src="cash-app-footer.png" alt="Cash App Footer" class="footer-img" />
+    </div>
+  </div>
+
+  <!-- Add Cash Modal -->
+  <div class="modal-bg" id="deposit-modal">
+    <div class="modal-card">
+      <img src="cash-add-cash.png" alt="Add Cash">
+      <div class="modal-title">Add Cash</div>
+      <div class="modal-desc">Securely add funds to your Cash App balance.</div>
+      <div class="modal-small">Available methods: Bank, Card, Bitcoin.<br>Min $1.00 per deposit.</div>
+      <div class="modal-btns">
+        <button class="modal-btn secondary" id="deposit-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cash Out Modal -->
+  <div class="modal-bg" id="withdraw-modal">
+    <div class="modal-card">
+      <img src="cash-cashout.png" alt="Cash Out">
+      <div class="modal-title">Cash Out</div>
+      <div class="modal-desc">Withdraw funds to your linked bank or debit card.</div>
+      <div class="modal-small">Standard (1-3 days) or Instant (fees may apply).</div>
+      <div class="modal-btns">
+        <button class="modal-btn" id="withdraw-now-btn">Cash Out</button>
+        <button class="modal-btn secondary" id="withdraw-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // PRELOADER LOGIC
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        // Fade out preloader then show app
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(function() {
+          preloader.style.display = 'none';
+          // Show main app
+          document.querySelector('.cash-container').style.display = '';
+        }, 500); // match transition time
+      }, 2000); // 2 seconds
+    });
+
+    // --- Modal logic for Add Cash and Cash Out (same as before) ---
+    const depositBtn = document.getElementById('deposit-btn');
+    const withdrawBtn = document.getElementById('withdraw-btn');
+    const depositModal = document.getElementById('deposit-modal');
+    const withdrawModal = document.getElementById('withdraw-modal');
+    const depositClose = document.getElementById('deposit-close');
+    const withdrawClose = document.getElementById('withdraw-close');
+    const withdrawNowBtn = document.getElementById('withdraw-now-btn');
+
+    depositBtn.onclick = function() {
+      depositModal.style.display = 'flex';
+    };
+    withdrawBtn.onclick = function() {
+      withdrawModal.style.display = 'flex';
+    };
+    depositClose.onclick = function() {
+      depositModal.style.display = 'none';
+    };
+    withdrawClose.onclick = function() {
+      withdrawModal.style.display = 'none';
+    };
+    withdrawNowBtn.onclick = function() {
+      alert('For demo: Cash Out initiated!');
+      withdrawModal.style.display = 'none';
+    };
+
+    // Allow clicking outside modal to close
+    window.onclick = function(e) {
+      if (e.target === depositModal) {
+        depositModal.style.display = 'none';
+      }
+      if (e.target === withdrawModal) {
+        withdrawModal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
