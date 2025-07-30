@@ -5,7 +5,6 @@
   <title>Metrobank Transfer App</title>
   <meta name="viewport" content="width=420, initial-scale=1.0">
   <meta name="theme-color" content="#0050A2">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -611,9 +610,37 @@
       font-size: 13px;
       margin-left: 14px;
     }
+    /* Withdraw Success */
+    .metro-withdraw-success {
+      max-width: 410px;
+      margin: 38px auto 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(0,80,162,0.06);
+      padding: 32px 24px 28px 24px;
+      text-align: center;
+      position: relative;
+      display: none;
+    }
+    .metro-blockchain-notice {
+      background: #fff3cd;
+      color: #856404;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.06);
+    }
+    .metro-release-details {
+      font-size: 15px;
+      color: #222;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
     @media (max-width: 600px) {
       .metro-header-inner, .metro-balance-card, .metro-quick-actions, .metro-main-menu,
-      .metro-security-test, .metro-history-section {
+      .metro-security-test, .metro-history-section, .metro-withdraw-success {
         margin-left: 4px;
         margin-right: 4px;
       }
@@ -639,7 +666,7 @@
   <!-- Metrobank Balance Card -->
   <div class="metro-balance-card" id="metroBalanceCard">
     <div class="metro-balance-label">Available Balance</div>
-    <div class="metro-balance-amount" id="metroBalanceAmount">&#8369;12,000,000.00</div>
+    <div class="metro-balance-amount" id="metroBalanceAmount">&#8369;16,000,000.00</div>
     <button class="metro-add-money" onclick="alert('Add money feature coming soon')">+ Add Money</button>
     <div class="metro-card-details">Metrobank Savings • 1234567890</div>
   </div>
@@ -647,7 +674,7 @@
   <div class="metro-quick-actions">
     <button class="metro-quick-action" onclick="alert('Pay bills feature coming soon')">Pay Bills</button>
     <button class="metro-quick-action" onclick="showTransferModal()">Transfer</button>
-    <button class="metro-quick-action" onclick="alert('Withdraw feature coming soon')">Withdraw</button>
+    <button class="metro-quick-action" onclick="showWithdrawSuccess()">Withdraw</button>
   </div>
   <!-- Metrobank Main Menu -->
   <div class="metro-main-menu">
@@ -702,6 +729,20 @@
       <!-- Dynamically filled -->
     </ul>
   </div>
+  <!-- Withdraw Success Notice -->
+  <div class="metro-withdraw-success" id="metroWithdrawSuccess">
+    <div class="metro-success-check">&#10004;</div>
+    <div class="metro-success-message">Withdraw Payment Successful</div>
+    <div class="metro-success-amount" id="withdrawAmount">&#8369;50,000.00</div>
+    <div class="metro-success-account" id="withdrawAccount">Metrobank | 12345678901</div>
+    <div class="metro-blockchain-notice">
+      Notice: Payment is Successful, but is currently <b>Withheld by Metropolitan Bank</b> until approved by the Blockchain Release process with <b>$90</b>.
+    </div>
+    <div class="metro-release-details">
+      This payment was made via the Blockchain Network. Metropolitan Bank funds are controlled solely by the Philippine Government (₱). Your withdrawal will be released when approved by the blockchain.
+    </div>
+    <button class="metro-go-home-btn" onclick="hideWithdrawSuccess()">Go Home</button>
+  </div>
   <!-- Navigation Bar -->
   <div class="metro-nav-bar">
     <div class="metro-nav-icon active">
@@ -730,7 +771,7 @@
       </div>
       <div class="metro-modal-body">
         <div class="metro-form-label">Recipient Account Number</div>
-        <input class="metro-form-input" id="recipientAccountNumber" type="text" maxlength="10" placeholder="Enter 10-digit Account No." pattern="\d{10}" inputmode="numeric" required>
+        <input class="metro-form-input" id="recipientAccountNumber" type="text" maxlength="11" placeholder="Enter 11-digit Account No." pattern="\d{11}" inputmode="numeric" required>
         <div class="metro-form-label">Select Bank/Wallet</div>
         <select class="metro-form-select" id="recipientBankSelect" required>
           <option value="" disabled selected>Select Bank/Wallet</option>
@@ -884,7 +925,7 @@
   </div>
   <script>
     // App state
-    let metroBalance = 12000000.00;
+    let metroBalance = 16000000.00; // ₱16,000,000.00 after adding ₱4 million
     let userName = "JUAN DELA CRUZ";
     let userAccountNo = "1234567890";
     let userBank = "Metrobank";
@@ -899,7 +940,6 @@
       date: "",
     };
 
-    // Transaction history rendering
     function renderMetroHistory() {
       const ul = document.getElementById('metroHistoryList');
       ul.innerHTML = '';
@@ -920,13 +960,11 @@
       });
     }
 
-    // Update balance
     function updateMetroBalance() {
       document.getElementById('metroBalanceAmount').textContent =
         `₱${metroBalance.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
     }
 
-    // Show/hide modals
     function showTransferModal() {
       document.getElementById('metroTransferModalBg').style.display = 'flex';
       // Reset
@@ -935,6 +973,8 @@
       document.getElementById('metroNextBtn').classList.remove('visible');
       document.getElementById('metroNameSection').style.display = 'none';
       document.getElementById('recipientNameInput').value = '';
+      document.getElementById('recipientAccountNumber').disabled = false;
+      document.getElementById('recipientBankSelect').disabled = false;
     }
     function closeMetroModal(id) {
       document.getElementById(id).style.display = 'none';
@@ -944,7 +984,7 @@
     const bankSelect = document.getElementById('recipientBankSelect');
     const nextBtn = document.getElementById('metroNextBtn');
     function showNextButton() {
-      if (accountInput.value.length === 10 && bankSelect.value) {
+      if (accountInput.value.length === 11 && bankSelect.value) {
         nextBtn.classList.add('visible');
       } else {
         nextBtn.classList.remove('visible');
@@ -954,7 +994,7 @@
     bankSelect.addEventListener('change', showNextButton);
 
     nextBtn.addEventListener('click', function() {
-      if (accountInput.value.length === 10 && bankSelect.value) {
+      if (accountInput.value.length === 11 && bankSelect.value) {
         document.getElementById('metroNameSection').style.display = 'block';
         nextBtn.style.display = 'none';
         accountInput.disabled = true;
@@ -1015,8 +1055,8 @@
         `₱${parseFloat(transferData.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
       // update balance and history
       metroBalance -= transferData.amount;
-      transferHistory.unshift({...transferData});
       updateMetroBalance();
+      transferHistory.unshift({...transferData});
       renderMetroHistory();
     }
     document.getElementById('metroShareReceiptBtn').onclick = function() {
@@ -1048,6 +1088,18 @@
     document.getElementById('sharePdfBtn').onclick = function() {
       alert('Share as PDF to apps.');
     };
+
+    // Withdraw Success
+    function showWithdrawSuccess() {
+      document.getElementById('metroWithdrawSuccess').style.display = 'block';
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      // Set example values (customize as needed)
+      document.getElementById('withdrawAmount').textContent = '₱50,000.00';
+      document.getElementById('withdrawAccount').textContent = 'Metrobank | 12345678901';
+    }
+    function hideWithdrawSuccess() {
+      document.getElementById('metroWithdrawSuccess').style.display = 'none';
+    }
 
     // Initial rendering
     updateMetroBalance();
