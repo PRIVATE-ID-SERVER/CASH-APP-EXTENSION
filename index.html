@@ -2,163 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OPay App Full Clone</title>
-  <meta name="viewport" content="width=768, initial-scale=1.0">
+  <title>Metrobank Transfer App</title>
+  <meta name="viewport" content="width=420, initial-scale=1.0">
+  <meta name="theme-color" content="#0050A2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #181818;
-      color: #fff;
+      background: #f4f6fb;
+      color: #222;
       font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       min-height: 100vh;
+      transition: background 0.2s;
     }
-    /* Header */
-    .header {
+    .metro-header {
+      background: #0050A2;
+      padding: 24px 0 16px 0;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.08);
+    }
+    .metro-header-inner {
       display: flex;
       align-items: center;
-      padding: 20px 16px 0 16px;
-      position: relative;
+      justify-content: space-between;
+      padding: 0 18px;
     }
-    .profile {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #ccc;
-      margin-right: 12px;
-    }
-    .header-title {
-      font-size: 20px;
-      font-weight: 500;
-    }
-    .header-icons {
+    .metro-profile {
       display: flex;
-      gap: 20px;
-      margin-left: auto;
+      align-items: center;
     }
-    .help {
-      font-size: 12px;
+    .metro-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #d1e3ff;
+      margin-right: 12px;
+      display: inline-block;
+    }
+    .metro-welcome {
+      font-size: 20px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    .metro-badge {
+      background: #fff;
+      color: #0050A2;
+      border-radius: 10px;
+      padding: 3px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .metro-notif {
+      font-size: 23px;
+      margin-left: 18px;
+      position: relative;
       color: #fff;
-      padding: 2px 7px;
-      background: #FF2D55;
-      border-radius: 8px;
-      align-self: center;
+      cursor: pointer;
     }
-    .icon {
-      font-size: 22px;
-      position: relative;
-    }
-    .notification {
-      position: relative;
-    }
-    .notification-count {
+    .metro-notif-count {
       position: absolute;
       top: -8px;
-      right: -8px;
-      background: #FF2D55;
+      right: -11px;
+      background: #d61a3c;
+      color: #fff;
       border-radius: 50%;
-      color: #fff;
-      font-size: 12px;
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 2px 7px;
+      font-size: 13px;
+      font-weight: 700;
     }
-    /* Balance Card */
-    .balance-card {
-      background: #18CFA8;
-      margin: 20px 16px 0 16px;
-      border-radius: 16px;
-      padding: 20px 16px;
-      color: #181818;
+    .metro-balance-card {
+      background: linear-gradient(90deg, #0050A2 65%, #6A9EEB 100%);
+      margin: -22px 18px 0 18px;
+      border-radius: 18px;
+      padding: 20px 16px 18px 16px;
+      color: #fff;
       position: relative;
+      box-shadow: 0 2px 12px rgba(0,80,162,0.08);
     }
-    .balance-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .metro-balance-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      opacity: 0.95;
     }
-    .balance-label {
+    .metro-balance-amount {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .metro-add-money {
       background: #fff;
-      color: #18CFA8;
-      border-radius: 8px;
-      padding: 2px 8px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-right: 6px;
-    }
-    .balance-history {
-      font-weight: 500;
-      font-size: 14px;
-      color: #181818;
-      cursor: pointer;
-    }
-    .balance-amount {
-      font-size: 36px;
-      font-weight: 700;
-      margin-top: 8px;
-      color: #181818;
-    }
-    .add-money {
-      position: absolute;
-      top: 20px;
-      right: 16px;
-      background: #181818;
-      color: #fff;
-      border-radius: 12px;
+      color: #0050A2;
       border: none;
-      padding: 8px 18px;
-      font-weight: 500;
+      border-radius: 22px;
       font-size: 16px;
-      cursor: pointer;
-    }
-    .business-account {
-      margin-top: 18px;
-      font-weight: 500;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      color: #181818;
-    }
-    .business-account-number {
-      margin-left: 12px;
       font-weight: 700;
-      color: #181818;
+      padding: 8px 24px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      box-shadow: 0 2px 8px rgba(106,158,235,0.12);
+      cursor: pointer;
+      transition: background 0.18s;
     }
-    /* Quick Actions */
-    .quick-actions {
+    .metro-card-details {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.93;
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+    .metro-quick-actions {
       display: flex;
       justify-content: space-between;
-      margin: 28px 16px 0 16px;
+      margin: 26px 18px 0 18px;
       gap: 12px;
     }
-    .quick-action {
-      background: #232323;
-      color: #fff;
+    .metro-quick-action {
+      background: #fff;
+      color: #0050A2;
       flex: 1;
-      border-radius: 10px;
+      border-radius: 14px;
       border: none;
-      padding: 14px 0;
-      font-weight: 600;
-      font-size: 17px;
+      padding: 16px 0;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.04);
       cursor: pointer;
+      transition: background 0.22s;
     }
-    /* Main Menu */
-    .main-menu {
-      background: #232323;
-      margin: 24px 16px 0 16px;
-      border-radius: 16px;
+    .metro-main-menu {
+      background: #fff;
+      margin: 22px 18px 0 18px;
+      border-radius: 18px;
       padding: 20px 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      gap: 18px;
       justify-items: center;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.04);
     }
-    .menu-item {
+    .metro-menu-item {
       text-align: center;
     }
-    .menu-icon-circle {
-      background: #181818;
+    .metro-menu-icon {
+      background: #e3eefd;
       border-radius: 50%;
       width: 44px;
       height: 44px;
@@ -166,37 +157,30 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 8px auto;
-      font-size: 24px;
+      font-size: 23px;
+      color: #0050A2;
+      box-shadow: 0 1px 3px rgba(0,80,162,0.07);
     }
-    .menu-label {
+    .metro-menu-label {
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
     }
-    .menu-promo {
-      background: #FF2D55;
-      color: #fff;
-      border-radius: 7px;
-      padding: 2px 5px;
-      font-size: 11px;
-      margin-left: 4px;
-      font-weight: 400;
-    }
-    /* Security Test */
-    .security-test {
-      background: #232323;
-      margin: 24px 16px 0 16px;
-      border-radius: 16px;
-      padding: 20px 16px;
-      color: #fff;
+    .metro-security-test {
+      background: #fff;
+      margin: 22px 18px 0 18px;
+      border-radius: 18px;
+      padding: 20px 16px 22px 16px;
+      color: #222;
       position: relative;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.04);
     }
-    .security-header {
+    .metro-security-header {
       display: flex;
       align-items: center;
       margin-bottom: 8px;
     }
-    .security-icon {
-      background: #18CFA8;
+    .metro-security-icon {
+      background: #0050A2;
       border-radius: 50%;
       width: 28px;
       height: 28px;
@@ -207,1250 +191,867 @@
       font-size: 18px;
       color: #fff;
     }
-    .security-title {
-      font-weight: 500;
-      font-size: 18px;
+    .metro-security-title {
+      font-weight: 600;
+      font-size: 17px;
     }
-    .security-question {
-      font-size: 16px;
+    .metro-security-question {
+      font-size: 15px;
       margin-bottom: 14px;
+      color: #0050A2;
     }
-    .security-option {
-      background: #18CFA8;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      color: #181818;
-      font-weight: 500;
+    .metro-security-option {
+      background: #e3eefd;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 8px;
+      color: #0050A2;
+      font-weight: 600;
     }
-    .security-option:last-child {
-      margin-bottom: 0;
-    }
-    .security-btn {
+    .metro-security-btn {
       position: absolute;
       right: 16px;
-      bottom: 16px;
-      background: #18CFA8;
+      bottom: 14px;
+      background: #0050A2;
       color: #fff;
       border: none;
-      border-radius: 30px;
+      border-radius: 22px;
       padding: 10px 22px;
       font-weight: 700;
-      font-size: 16px;
-      box-shadow: 0 2px 8px rgba(24,207,168,0.25);
+      font-size: 15px;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.13);
       cursor: pointer;
     }
-    /* Navigation Bar */
-    .nav-bar {
+    .metro-nav-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #232323;
+      background: #fff;
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 14px 0;
+      box-shadow: 0 -2px 8px rgba(0,80,162,0.06);
       z-index: 100;
     }
-    .nav-icon {
+    .metro-nav-icon {
       text-align: center;
-      color: #fff;
-      font-size: 24px;
+      color: #0050A2;
     }
-    .nav-icon.active {
-      color: #18CFA8;
+    .metro-nav-icon.active {
+      color: #0050A2;
+      font-weight: 700;
     }
-    .nav-label {
+    .metro-nav-label {
       font-size: 13px;
       font-weight: 500;
       margin-top: 2px;
     }
-    /* Transaction History */
-    .transaction-history-panel {
+    /* Transfer To Bank Modal */
+    .metro-modal-bg {
+      display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(24,24,24,0.97);
-      z-index: 9999;
-      display: none;
-      flex-direction: column;
-      padding-top: 46px;
-    }
-    .tx-history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 28px;
-      font-size: 22px;
-      font-weight: 600;
-      color: #fff;
-      border-bottom: 1px solid #232323;
-    }
-    .tx-history-close {
-      font-size: 28px;
-      color: #18CFA8;
-      cursor: pointer;
-    }
-    .tx-list {
-      margin: 28px 24px;
-      overflow-y: auto;
-    }
-    .tx-item {
-      background: #232323;
-      color: #fff;
-      border-radius: 16px;
-      margin-bottom: 16px;
-      padding: 18px 20px;
-      font-size: 17px;
-      box-shadow: 0 2px 8px rgba(24,207,168,0.05);
-      display: flex;
-      flex-direction: column;
-    }
-    .tx-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3px;
-    }
-    .tx-amount {
-      font-weight: 700;
-      color: #18CFA8;
-      font-size: 20px;
-    }
-    .tx-bank {
-      color: #A7A7A7;
-      font-size: 15px;
-      font-weight: 500;
-    }
-    .tx-date {
-      font-size: 14px;
-      color: #bcbcbc;
-    }
-    /* All Screens */
-    .app-screen {
-      display: none;
-      min-height: 100vh;
-      background: #181818;
-      position: absolute;
-      top: 0; left: 0; width: 100vw; z-index: 101;
-      transition: opacity 0.2s;
-    }
-    .app-screen.active {
-      display: block;
-      opacity: 1;
-    }
-    /* Bank Transfer Screens */
-    .header-bar {
-      display: flex;
-      align-items: center;
-      padding: 18px 16px 0 16px;
-      background: #181818;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .header-bar .back-arrow {
-      font-size: 28px;
-      margin-right: 20px;
-      cursor: pointer;
-      color: #fff;
-    }
-    .header-bar .title {
-      flex: 1;
-      text-align: left;
-    }
-    .header-bar .history {
-      color: #18CFA8;
-      font-size: 18px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    /* Promo Banner */
-    .promo-banner {
-      background: #232323;
-      margin: 16px 16px 0 16px;
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      min-height: 70px;
-      padding: 0;
+      inset: 0;
+      background: rgba(0,80,162,0.06);
+      backdrop-filter: blur(2px);
+      z-index: 200;
       justify-content: center;
+      align-items: flex-start;
     }
-    .promo-banner img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 16px;
-    }
-    .free-transfer {
-      background: #432B5F;
-      color: #C5A7FF;
-      margin: 16px 16px 0 16px;
-      border-radius: 10px;
-      padding: 9px 16px;
-      font-size: 17px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-    }
-    .free-transfer .icon {
-      color: #C5A7FF;
-      margin-right: 7px;
-      font-size: 17px;
-    }
-    /* Form Section */
-    .form-section {
-      background: #232323;
-      margin: 18px 16px 0 16px;
-      border-radius: 16px;
-      padding: 22px 16px 18px 16px;
-    }
-    .form-label {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
-    .form-input,
-    .form-select {
-      width: 100%;
-      padding: 14px 10px;
-      font-size: 17px;
-      border: none;
-      background: #181818;
-      color: #fff;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-    }
-    .form-select {
-      cursor: pointer;
-    }
-    .green-btn {
-      width: 100%;
-      background: #18CFA8;
-      color: #fff;
-      border: none;
-      border-radius: 26px;
-      padding: 16px 0;
-      font-size: 20px;
-      font-weight: 600;
-      margin: 10px 0 0 0;
-      cursor: pointer;
-      display: none;
-      transition: all 0.2s;
-    }
-    .green-btn.visible {
-      display: block;
-    }
-    /* Recents/Favourites */
-    .recents-section {
-      background: #232323;
-      margin: 16px 16px 0 16px;
-      border-radius: 16px;
-      padding: 18px 0 10px 0;
-    }
-    .recents-tabs {
-      display: flex;
-      align-items: center;
-      padding: 0 16px 10px 16px;
-      border-bottom: 1px solid #2d2d2d;
-    }
-    .recents-tab {
-      font-size: 16px;
-      font-weight: 600;
-      color: #18CFA8;
-      margin-right: 24px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 0 4px 4px 4px;
-      border-bottom: 2px solid #18CFA8;
-    }
-    .recents-tab.inactive {
-      color: #fff;
-      border-bottom: none;
-      opacity: 0.5;
-    }
-    .recents-search {
-      margin-left: auto;
-      font-size: 22px;
-      color: #18CFA8;
-      cursor: pointer;
-    }
-    .recents-list {
-      padding: 0 16px;
-    }
-    .recent-item {
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #2d2d2d;
-      padding: 16px 0;
-      font-size: 15px;
-    }
-    .recent-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .recent-title {
-      font-weight: 600;
-      color: #fff;
-    }
-    .recent-desc {
-      color: #A7A7A7;
-      font-size: 14px;
-      margin-top: 2px;
-    }
-    .recent-bank-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #181818;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-left: 12px;
-      color: #18CFA8;
-    }
-    /* Amount Entry */
-    .account-section {
-      display: flex;
-      align-items: center;
-      background: #232323;
-      margin: 20px 0 0 0;
-      padding: 24px 16px 16px 16px;
-      border-radius: 0 0 0 0;
-    }
-    .account-icon {
-      width: 60px;
-      height: 60px;
+    .metro-modal {
       background: #fff;
-      border-radius: 50%;
+      border-radius: 18px;
+      box-shadow: 0 4px 28px rgba(0,80,162,0.13);
+      margin-top: 60px;
+      width: 98%;
+      max-width: 410px;
+      padding: 0 0 18px 0;
+    }
+    .metro-modal-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: bold;
-      color: #0066FF;
-      margin-right: 18px;
+      justify-content: space-between;
+      padding: 20px 18px 14px 18px;
+      border-bottom: 1px solid #e3eefd;
+      background: #f4f6fb;
+      border-radius: 18px 18px 0 0;
     }
-    .account-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .account-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-    }
-    .account-desc {
-      color: #A7A7A7;
-      font-size: 16px;
-      margin-top: 2px;
-    }
-    .form-section .amount-range {
-      color: #727272;
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      opacity: 0.5;
-    }
-    .amount-input {
-      width: 100%;
-      padding: 14px 10px;
-      font-size: 28px;
-      border: none;
-      background: #181818;
-      color: #fff;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
+    .metro-modal-title {
+      font-size: 19px;
       font-weight: 700;
-      text-align: left;
-      letter-spacing: 2px;
+      color: #0050A2;
     }
-    .quick-amounts {
+    .metro-modal-close {
+      font-size: 22px;
+      color: #0050A2;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .metro-modal-body {
+      padding: 11px 18px 0 18px;
+    }
+    .metro-form-label {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 9px;
+      color: #0050A2;
+    }
+    .metro-form-input, .metro-form-select {
+      width: 100%;
+      padding: 12px 10px;
+      font-size: 16px;
+      border: 1px solid #e3eefd;
+      background: #f4f6fb;
+      color: #0050A2;
+      border-radius: 8px;
+      margin-bottom: 17px;
+      box-sizing: border-box;
+      font-weight: 600;
+      outline: none;
+      transition: border 0.13s;
+    }
+    .metro-form-input:focus, .metro-form-select:focus {
+      border: 1.5px solid #0050A2;
+      background: #e3eefd;
+    }
+    .metro-form-select {
+      cursor: pointer;
+    }
+    .metro-form-btn {
+      width: 100%;
+      background: #0050A2;
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 14px 0;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 8px 0 0 0;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.10);
+      display: none;
+      transition: all 0.16s;
+    }
+    .metro-form-btn.visible {
+      display: block;
+    }
+    .metro-modal-footer {
+      padding: 18px 18px 0 18px;
+    }
+    .metro-modal-footer-btn {
+      width: 100%;
+      background: #0050A2;
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 14px 0;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 14px;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.10);
+    }
+    /* Amount Modal */
+    .metro-amount-quick {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 10px;
+      margin-bottom: 14px;
+      margin-top: 6px;
     }
-    .quick-amount-btn {
-      background: #181818;
-      color: #fff;
+    .metro-amount-btn {
+      background: #e3eefd;
+      color: #0050A2;
       border: none;
       border-radius: 12px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      padding: 18px 0;
+      padding: 14px 0;
       cursor: pointer;
       transition: background 0.15s;
     }
-    .quick-amount-btn.selected {
-      background: #18CFA8;
+    .metro-amount-btn.selected {
+      background: #0050A2;
       color: #fff;
     }
-    .form-label-remark {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #fff;
-      letter-spacing: 0.5px;
-      margin-top: 12px;
-    }
-    .remark-input {
-      width: 100%;
-      padding: 14px 10px;
-      font-size: 17px;
-      border: none;
-      background: #181818;
-      color: #fff;
-      border-radius: 8px;
-      box-sizing: border-box;
-      margin-bottom: 12px;
-    }
-    /* Success Screen */
-    .done {
-      position: absolute;
-      top: 32px;
-      right: 24px;
-      color: #18CFA8;
-      font-size: 24px;
-      font-weight: 500;
-      cursor: pointer;
-      z-index: 20;
-    }
-    .success-section {
+    /* Success Modal */
+    .metro-success-section {
       text-align: center;
-      margin-top: 48px;
-      margin-bottom: 36px;
+      margin-top: 44px;
+      margin-bottom: 28px;
     }
-    .success-check {
-      width: 70px;
-      height: 70px;
+    .metro-success-check {
+      width: 66px;
+      height: 66px;
       background: #18CFA8;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 46px;
+      font-size: 42px;
       color: #fff;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-    .success-message {
-      font-size: 28px;
-      font-weight: 500;
-      margin-bottom: 12px;
-      color: #fff;
+    .metro-success-message {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #0050A2;
     }
-    .success-amount {
-      font-size: 36px;
+    .metro-success-amount {
+      font-size: 33px;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 20px;
+      color: #0050A2;
+      margin-bottom: 16px;
       letter-spacing: 2px;
     }
-    .action-buttons {
+    .metro-action-buttons {
       display: flex;
       justify-content: center;
-      gap: 28px;
-      margin-bottom: 30px;
+      gap: 22px;
+      margin-bottom: 24px;
     }
-    .action-btn {
-      background: #232323;
+    .metro-action-btn {
+      background: #e3eefd;
       border-radius: 16px;
-      padding: 22px 38px;
-      color: #fff;
-      font-size: 19px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      padding: 13px 22px;
+      color: #0050A2;
+      font-size: 18px;
+      font-weight: 700;
       border: none;
       cursor: pointer;
-      min-width: 180px;
+      min-width: 145px;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 13px;
     }
-    .action-btn-icon {
-      width: 34px;
-      height: 34px;
-      background: #18CFA8;
+    .metro-action-btn-icon {
+      width: 27px;
+      height: 27px;
+      background: #0050A2;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 24px;
-    }
-    .bonus-section {
-      background: #181818;
-      margin: 0 16px;
-      border-radius: 18px;
-      padding: 24px 0 10px 0;
-    }
-    .bonus-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-left: 22px;
-      margin-bottom: 16px;
-      color: #fff;
-    }
-    .bonus-list {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      padding: 0 22px 16px 22px;
-    }
-    .bonus-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #232323;
-      border-radius: 12px;
-      padding: 16px 18px;
-    }
-    .bonus-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .bonus-icon {
-      width: 44px;
-      height: 44px;
-      background: #fff;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      color: #FFD600;
-    }
-    .bonus-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .bonus-title-item {
-      font-size: 17px;
-      font-weight: bold;
-      color: #fff;
-    }
-    .bonus-desc-item {
-      font-size: 15px;
-      color: #A7A7A7;
-    }
-    .bonus-go-btn {
-      background: #18CFA8;
-      color: #fff;
       font-size: 18px;
-      font-weight: 600;
-      border: none;
-      border-radius: 22px;
-      padding: 10px 28px;
-      cursor: pointer;
-      letter-spacing: 1px;
     }
-    .bonus-icon.dollar {
-      color: #18CFA8;
-      font-size: 28px;
-    }
-    .bonus-icon.online {
-      color: #18CFA8;
-      font-size: 22px;
-    }
-    .bonus-icon.tv {
-      color: #2196F3;
-      font-size: 28px;
-    }
-    /* Share Receipt */
-    .receipt-card {
-      background: #232323;
-      margin: 30px 16px 0 16px;
-      border-radius: 24px 24px 24px 24px;
-      padding: 32px 28px 22px 28px;
+    /* Receipt Modal */
+    .metro-receipt-card {
+      background: #fff;
+      margin: 4px 2px 0 2px;
+      border-radius: 18px;
+      padding: 28px 14px 18px 14px;
       position: relative;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+      box-shadow: 0 6px 24px rgba(0,80,162,0.06);
       overflow: hidden;
+      text-align: left;
+      max-width: 410px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .watermark {
-      position: absolute;
-      left: 0; top: 0; right: 0; bottom: 0;
-      background-repeat: repeat;
-      background-size: 200px 60px;
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .opay-logo {
+    .metro-receipt-logo {
       font-weight: bold;
-      font-size: 30px;
-      color: #fff;
+      font-size: 24px;
+      color: #0050A2;
       margin-bottom: 10px;
     }
-    .transaction-title {
+    .metro-receipt-title {
       position: absolute;
-      top: 38px;
+      top: 28px;
       right: 24px;
-      font-size: 19px;
-      color: #fff;
-      font-weight: 500;
+      font-size: 16px;
+      color: #0050A2;
+      font-weight: 600;
       opacity: 0.88;
     }
-    .amount-section {
-      text-align: center;
-      margin-top: 32px;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 2;
-    }
-    .amount-value {
-      font-size: 36px;
+    .metro-receipt-amount {
+      font-size: 29px;
       font-weight: 700;
       color: #18CFA8;
       margin-bottom: 2px;
       letter-spacing: 2px;
+      text-align: center;
     }
-    .amount-success {
-      font-size: 22px;
+    .metro-receipt-success {
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 2px;
-      color: #fff;
+      color: #0050A2;
+      text-align: center;
     }
-    .amount-date {
-      font-size: 15px;
-      color: #bcbcbc;
-      margin-bottom: 6px;
-    }
-    .receipt-details {
-      margin-top: 18px;
-      margin-bottom: 18px;
-      font-size: 17px;
-    }
-    .receipt-label {
-      font-size: 16px;
-      color: #bcbcbc;
-      font-weight: 500;
+    .metro-receipt-date {
+      font-size: 13px;
+      color: #0050A2;
       margin-bottom: 7px;
+      text-align: center;
     }
-    .receipt-row {
+    .metro-receipt-details {
+      margin-top: 18px;
+      margin-bottom: 14px;
+      font-size: 15px;
+      color: #222;
+    }
+    .metro-receipt-label {
+      font-size: 14px;
+      color: #0050A2;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .metro-receipt-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 8px;
-      font-size: 16px;
+      margin-bottom: 7px;
+      font-size: 15px;
     }
-    .details-label {
-      color: #bcbcbc;
+    .metro-details-label {
       font-weight: 500;
       width: 38%;
+      color: #222;
     }
-    .details-value {
-      color: #fff;
-      font-weight: 600;
+    .metro-details-value {
+      font-weight: 700;
       text-align: right;
       width: 62%;
+      color: #0050A2;
     }
-    .transaction-number {
-      font-size: 15px;
-      color: #bcbcbc;
-      margin-bottom: 10px;
+    .metro-transaction-number {
+      font-size: 12px;
+      color: #0050A2;
+      margin-bottom: 8px;
       word-break: break-all;
+      text-align: center;
     }
-    .receipt-note {
-      margin-top: 18px;
-      font-size: 14px;
-      color: #bcbcbc;
-      line-height: 1.4;
+    .metro-receipt-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #0050A2;
+      line-height: 1.38;
+      text-align: center;
     }
-    .share-section {
+    .metro-share-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #202020;
-      padding: 18px 16px 18px 16px;
-      border-top: 1px solid #232323;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+      background: #f4f6fb;
+      padding: 12px 18px 12px 18px;
+      border-top: 1px solid #e3eefd;
       z-index: 10;
+      border-radius: 0 0 18px 18px;
     }
-    .share-btn {
+    .metro-share-btn {
       display: flex;
       align-items: center;
       gap: 8px;
       background: none;
-      color: #18CFA8;
+      color: #0050A2;
       border: none;
-      font-size: 19px;
-      font-weight: 500;
+      font-size: 17px;
+      font-weight: 600;
       cursor: pointer;
-      padding: 0 18px;
+      padding: 0 14px;
     }
-    .share-btn img {
-      width: 24px;
-      height: 24px;
-      filter: invert(58%) sepia(90%) saturate(469%) hue-rotate(125deg) brightness(91%) contrast(88%);
-    }
-    .go-home-btn {
-      background: #18CFA8;
+    .metro-go-home-btn {
+      background: #0050A2;
       color: #fff;
       border: none;
-      border-radius: 20px;
-      font-size: 19px;
-      font-weight: 600;
-      padding: 14px 40px;
+      border-radius: 16px;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 11px 30px;
       display: block;
-      margin: 38px auto 0 auto;
+      margin: 22px auto 0 auto;
       cursor: pointer;
     }
+    /* Transaction History */
+    .metro-history-section {
+      background: #fff;
+      border-radius: 18px;
+      margin: 22px 18px 80px 18px;
+      box-shadow: 0 2px 8px rgba(0,80,162,0.04);
+      padding: 18px 16px 18px 16px;
+    }
+    .metro-history-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0050A2;
+      margin-bottom: 13px;
+    }
+    .metro-history-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .metro-history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e3eefd;
+      padding: 10px 0;
+      font-size: 15px;
+    }
+    .metro-history-item:last-child {
+      border-bottom: none;
+    }
+    .metro-history-bank {
+      font-weight: 700;
+      color: #0050A2;
+      margin-right: 12px;
+    }
+    .metro-history-amount {
+      font-weight: 700;
+      color: #18CFA8;
+      margin-left: 10px;
+    }
+    .metro-history-date {
+      color: #6A9EEB;
+      font-size: 13px;
+      margin-left: 14px;
+    }
     @media (max-width: 600px) {
-      .header-bar, .promo-banner, .free-transfer, .form-section, .bank-transfer-monitor, .recents-section, .account-section, .form-section, .receipt-card {
+      .metro-header-inner, .metro-balance-card, .metro-quick-actions, .metro-main-menu,
+      .metro-security-test, .metro-history-section {
         margin-left: 4px;
         margin-right: 4px;
       }
-      .bonus-section {
-        margin: 0 4px;
-      }
-      .action-btn {
-        min-width: 120px;
-        padding: 16px 8px;
-      }
-      .go-home-btn { padding: 14px 12px; }
-      .share-section { padding: 10px 4px; }
+      .metro-balance-card {padding: 18px 6px 14px 12px;}
+      .metro-go-home-btn {padding: 11px 10px;}
     }
   </style>
 </head>
 <body>
-  <!-- Home Screen -->
-  <div id="homeScreen" class="app-screen active">
-    <div class="header">
-      <div class="profile"></div>
-      <span class="header-title">Hi, VICTORIA</span>
-      <div class="header-icons">
-        <span class="help">HELP</span>
-        <span class="icon">🔍</span>
-        <span class="icon notification">
-          🔔
-          <span class="notification-count" id="notifCount">25</span>
-        </span>
+  <!-- Metrobank Header -->
+  <div class="metro-header">
+    <div class="metro-header-inner">
+      <div class="metro-profile">
+        <div class="metro-avatar"></div>
+        <span class="metro-welcome">Hello, JUAN DELA CRUZ</span>
+        <span class="metro-badge">Platinum</span>
       </div>
-    </div>
-    <div class="balance-card">
-      <div class="balance-header">
-        <span class="balance-label">Available Balance</span>
-        <span class="balance-history" id="showTxHistoryBtn">Transaction History &gt;</span>
-      </div>
-      <div class="balance-amount" id="availableBalance">&#8358;12000000.00</div>
-      <button class="add-money">+ Add Money</button>
-      <div class="business-account">
-        Business Transfer Acct.
-        <span class="business-account-number">6100684620</span>
-      </div>
-    </div>
-    <div class="quick-actions">
-      <button class="quick-action">To OPay</button>
-      <button class="quick-action">To Bank</button>
-      <button class="quick-action" id="withdrawBtn">Withdraw</button>
-    </div>
-    <div class="main-menu">
-      <div class="menu-item">
-        <div class="menu-icon-circle">📱</div>
-        <div class="menu-label">Airtime <span class="menu-promo">Up to 6%</span></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">🔢</div>
-        <div class="menu-label">Data</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">⚽</div>
-        <div class="menu-label">Betting</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">📺</div>
-        <div class="menu-label">TV</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">🗄️</div>
-        <div class="menu-label">Safebox</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">🤝</div>
-        <div class="menu-label">Loan</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">🎟️</div>
-        <div class="menu-label">Invitation</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-icon-circle">➕</div>
-        <div class="menu-label">More</div>
-      </div>
-    </div>
-    <div class="security-test">
-      <div class="security-header">
-        <span class="security-icon">🛡️</span>
-        <span class="security-title">Security Test</span>
-      </div>
-      <div class="security-question">
-        Pay N500 and receive N1,000, or pay N1,000 and receive N10,000.
-      </div>
-      <div class="security-option">A. This is most likely a form of fraud</div>
-      <div class="security-option">B. It is a charity scheme</div>
-      <button class="security-btn">Click for Security</button>
-    </div>
-    <div class="nav-bar">
-      <div class="nav-icon active">
-        <div>↩️</div>
-        <div class="nav-label">Home</div>
-      </div>
-      <div class="nav-icon">
-        <div>💎</div>
-        <div class="nav-label">Rewards</div>
-      </div>
-      <div class="nav-icon">
-        <div>💰</div>
-        <div class="nav-label">Finance</div>
-      </div>
-      <div class="nav-icon">
-        <div>💳</div>
-        <div class="nav-label">Cards</div>
-      </div>
-      <div class="nav-icon">
-        <div>👤</div>
-        <div class="nav-label">Me</div>
+      <div>
+        <span class="metro-notif">&#128276;<span class="metro-notif-count">3</span></span>
       </div>
     </div>
   </div>
-  <!-- Transaction History -->
-  <div id="txHistoryPanel" class="transaction-history-panel">
-    <div class="tx-history-header">
-      <span>Transaction History</span>
-      <span class="tx-history-close" id="txCloseBtn">&#10006;</span>
-    </div>
-    <div class="tx-list" id="txList"></div>
+  <!-- Metrobank Balance Card -->
+  <div class="metro-balance-card" id="metroBalanceCard">
+    <div class="metro-balance-label">Available Balance</div>
+    <div class="metro-balance-amount" id="metroBalanceAmount">&#8369;12,000,000.00</div>
+    <button class="metro-add-money" onclick="alert('Add money feature coming soon')">+ Add Money</button>
+    <div class="metro-card-details">Metrobank Savings • 1234567890</div>
   </div>
-  <!-- Transfer To Bank (Image 2) -->
-  <div id="transferBankScreen" class="app-screen">
-    <div class="header-bar">
-      <span class="back-arrow" id="backToHomeBtn">&#8592;</span>
-      <span class="title">Transfer To Bank Account</span>
-      <span class="history">History</span>
+  <!-- Quick Actions -->
+  <div class="metro-quick-actions">
+    <button class="metro-quick-action" onclick="alert('Pay bills feature coming soon')">Pay Bills</button>
+    <button class="metro-quick-action" onclick="showTransferModal()">Transfer</button>
+    <button class="metro-quick-action" onclick="alert('Withdraw feature coming soon')">Withdraw</button>
+  </div>
+  <!-- Metrobank Main Menu -->
+  <div class="metro-main-menu">
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128222;</div>
+      <div class="metro-menu-label">Mobile Load</div>
     </div>
-    <div class="promo-banner">
-      <img src="https://opayweb.com/images/ilottbet-banner.jpg" alt="Deposit to Win iPhone and Cash Bonuses">
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128176;</div>
+      <div class="metro-menu-label">Gcash</div>
     </div>
-    <div class="free-transfer">
-      <span class="icon">&#x20A6;</span>
-      Free transfers for the day: <span style="font-weight:700; margin-left:5px;">3</span>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128181;</div>
+      <div class="metro-menu-label">Loans</div>
     </div>
-    <form class="form-section" id="transferForm" autocomplete="off">
-      <div class="form-label">Recipient Account</div>
-      <input type="text" class="form-input" id="accountNumber" maxlength="10" placeholder="Enter 10 digits Account Number" pattern="\d{10}" inputmode="numeric" required>
-      <select class="form-select" id="bankSelect" required>
-        <option value="" disabled selected>Select Bank</option>
-        <!-- 30 Sample Banks and Wallet Apps -->
-        <option value="opay">OPay</option>
-        <option value="moniepoint">MoniePoint</option>
-        <option value="palmpay">PalmPay</option>
-        <option value="kuda">Kuda</option>
-        <option value="gtbank">GTBank</option>
-        <option value="access">Access Bank</option>
-        <option value="uba">UBA</option>
-        <option value="zenith">Zenith Bank</option>
-        <option value="fidelity">Fidelity Bank</option>
-        <option value="ecobank">EcoBank</option>
-        <option value="stanbic">Stanbic IBTC</option>
-        <option value="polaris">Polaris Bank</option>
-        <option value="keystone">Keystone Bank</option>
-        <option value="fcmb">FCMB</option>
-        <option value="unity">Unity Bank</option>
-        <option value="firstbank">First Bank</option>
-        <option value="wema">Wema Bank</option>
-        <option value="rubies">Rubies MFB</option>
-        <option value="eyowo">Eyowo</option>
-        <option value="vbank">VBank</option>
-        <option value="carbon">Carbon</option>
-        <option value="mint">Mint</option>
-        <option value="sparkle">Sparkle</option>
-        <option value="abeg">Abeg</option>
-        <option value="9psb">9PSB</option>
-        <option value="tajbank">TAJ Bank</option>
-        <option value="globus">Globus Bank</option>
-        <option value="lotusbank">Lotus Bank</option>
-        <option value="suntrust">SunTrust Bank</option>
-        <option value="eco">EcoBank Mobile</option>
-      </select>
-      <button type="button" class="green-btn" id="nextBtn">Next</button>
-      <div id="nameSection" style="display:none;margin-top:16px;">
-        <input type="text" class="form-input" id="accountName" placeholder="Enter Account Name" maxlength="40">
-        <button type="button" class="green-btn visible" id="finalNextBtn">Next</button>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128179;</div>
+      <div class="metro-menu-label">Pay Online</div>
+    </div>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128184;</div>
+      <div class="metro-menu-label">MetroBank</div>
+    </div>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128179;</div>
+      <div class="metro-menu-label">BPI</div>
+    </div>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128184;</div>
+      <div class="metro-menu-label">BDO</div>
+    </div>
+    <div class="metro-menu-item">
+      <div class="metro-menu-icon">&#128184;</div>
+      <div class="metro-menu-label">UnionBank</div>
+    </div>
+  </div>
+  <!-- Security Test -->
+  <div class="metro-security-test">
+    <div class="metro-security-header">
+      <span class="metro-security-icon">&#128274;</span>
+      <span class="metro-security-title">Security Reminder</span>
+    </div>
+    <div class="metro-security-question">Never share your OTP or password. Metrobank will never ask for it.</div>
+    <div class="metro-security-option">A. Got it!</div>
+    <div class="metro-security-option">B. Learn more</div>
+    <button class="metro-security-btn" onclick="alert('Security Info')">Click for Security Tips</button>
+  </div>
+  <!-- Transaction History Section -->
+  <div class="metro-history-section" id="metroHistorySection">
+    <div class="metro-history-title">Transaction History</div>
+    <ul class="metro-history-list" id="metroHistoryList">
+      <!-- Dynamically filled -->
+    </ul>
+  </div>
+  <!-- Navigation Bar -->
+  <div class="metro-nav-bar">
+    <div class="metro-nav-icon active">
+      <div>&#8962;</div>
+      <div class="metro-nav-label">Home</div>
+    </div>
+    <div class="metro-nav-icon">
+      <div>&#127942;</div>
+      <div class="metro-nav-label">Rewards</div>
+    </div>
+    <div class="metro-nav-icon">
+      <div>&#128179;</div>
+      <div class="metro-nav-label">Finance</div>
+    </div>
+    <div class="metro-nav-icon">
+      <div>&#128100;</div>
+      <div class="metro-nav-label">Me</div>
+    </div>
+  </div>
+  <!-- Transfer Modal -->
+  <div class="metro-modal-bg" id="metroTransferModalBg">
+    <div class="metro-modal" id="metroTransferModal">
+      <div class="metro-modal-header">
+        <span class="metro-modal-title">Transfer to Bank/Wallet</span>
+        <span class="metro-modal-close" onclick="closeMetroModal('metroTransferModalBg')">&times;</span>
       </div>
-    </form>
-    <div class="recents-section">
-      <div class="recents-tabs">
-        <button class="recents-tab">Recents</button>
-        <button class="recents-tab inactive">Favourites</button>
-        <span class="recents-search">&#128269;</span>
-      </div>
-      <div class="recents-list">
-        <div class="recent-item">
-          <div class="recent-info">
-            <span class="recent-title">POS Transfer-VICTORIA ONYEDIKACHI DURU</span>
-            <span class="recent-desc">5730844242 MONIE POINT</span>
-          </div>
-          <div class="recent-bank-icon" style="background:#fff;color:#0066ff;">M</div>
-        </div>
-        <div class="recent-item">
-          <div class="recent-info">
-            <span class="recent-title">CHINENYE CHARITY DAVID</span>
-            <span class="recent-desc">6105467543 OPay</span>
-          </div>
-          <div class="recent-bank-icon" style="background:#fff;color:#18CFA8;">&#9675;</div>
+      <div class="metro-modal-body">
+        <div class="metro-form-label">Recipient Account Number</div>
+        <input class="metro-form-input" id="recipientAccountNumber" type="text" maxlength="10" placeholder="Enter 10-digit Account No." pattern="\d{10}" inputmode="numeric" required>
+        <div class="metro-form-label">Select Bank/Wallet</div>
+        <select class="metro-form-select" id="recipientBankSelect" required>
+          <option value="" disabled selected>Select Bank/Wallet</option>
+          <option value="Metrobank">Metrobank</option>
+          <option value="BDO">BDO</option>
+          <option value="BPI">BPI</option>
+          <option value="UnionBank">UnionBank</option>
+          <option value="Security Bank">Security Bank</option>
+          <option value="China Bank">China Bank</option>
+          <option value="PNB">PNB</option>
+          <option value="RCBC">RCBC</option>
+          <option value="Landbank">Landbank</option>
+          <option value="EastWest Bank">EastWest Bank</option>
+          <option value="PSBank">PSBank</option>
+          <option value="AUB">AUB</option>
+          <option value="Gcash">Gcash</option>
+          <option value="Paymaya">Paymaya</option>
+          <option value="DiskarTech">DiskarTech</option>
+          <option value="ING">ING</option>
+          <option value="CIMB">CIMB</option>
+          <option value="Robinsons Bank">Robinsons Bank</option>
+          <option value="Maybank">Maybank</option>
+          <option value="CTBC">CTBC</option>
+          <option value="HSBC">HSBC</option>
+          <option value="Bank of Commerce">Bank of Commerce</option>
+          <option value="Sterling Bank">Sterling Bank</option>
+          <option value="UCPB">UCPB</option>
+          <option value="Metrobank Card">Metrobank Card</option>
+          <option value="OmniPay">OmniPay</option>
+          <option value="Sun Savings Bank">Sun Savings Bank</option>
+          <option value="Wealth Development Bank">Wealth Development Bank</option>
+          <option value="Bank of Makati">Bank of Makati</option>
+          <option value="Philtrust Bank">Philtrust Bank</option>
+        </select>
+        <button class="metro-form-btn" id="metroNextBtn">Next</button>
+        <div id="metroNameSection" style="display:none;">
+          <div class="metro-form-label">Recipient Name</div>
+          <input class="metro-form-input" id="recipientNameInput" maxlength="40" placeholder="Enter Account Name">
+          <button class="metro-form-btn visible" id="metroNameNextBtn">Next</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- Transfer Amount Screen (Image 3) -->
-  <div id="transferAmountScreen" class="app-screen">
-    <div class="header-bar">
-      <span class="back-arrow" id="backToBankBtn">&#8592;</span>
-      <span class="title">Transfer To Bank Account</span>
-    </div>
-    <div class="account-section" id="accountDetailsSection">
-      <div class="account-icon" id="accountBankLogo">M</div>
-      <div class="account-details">
-        <span class="account-title" id="accountDisplayTitle">POS Transfer-</span>
-        <span class="account-desc" id="accountDisplayDesc">5730844242 MONIE POINT</span>
+  <!-- Amount Modal -->
+  <div class="metro-modal-bg" id="metroAmountModalBg">
+    <div class="metro-modal" id="metroAmountModal">
+      <div class="metro-modal-header">
+        <span class="metro-modal-title">Enter Amount</span>
+        <span class="metro-modal-close" onclick="closeMetroModal('metroAmountModalBg')">&times;</span>
+      </div>
+      <div class="metro-modal-body">
+        <div class="metro-form-label">Amount (₱100.00 - ₱5,000,000.00)</div>
+        <input type="number" class="metro-form-input" id="metroAmountInput" min="100" max="5000000" step="any" placeholder="Enter Amount">
+        <div class="metro-amount-quick">
+          <button type="button" class="metro-amount-btn" data-amount="500">&#8369;500</button>
+          <button type="button" class="metro-amount-btn" data-amount="1000">&#8369;1,000</button>
+          <button type="button" class="metro-amount-btn" data-amount="2000">&#8369;2,000</button>
+          <button type="button" class="metro-amount-btn" data-amount="5000">&#8369;5,000</button>
+          <button type="button" class="metro-amount-btn" data-amount="10000">&#8369;10,000</button>
+          <button type="button" class="metro-amount-btn" data-amount="20000">&#8369;20,000</button>
+        </div>
+        <div class="metro-form-label">Remark <span style="font-weight:400;color:#888;">(Optional)</span></div>
+        <input class="metro-form-input" id="metroRemarkInput" maxlength="50" placeholder="What's this for?">
+        <button class="metro-form-btn" id="metroConfirmBtn" disabled>Confirm</button>
       </div>
     </div>
-    <form class="form-section" id="amountForm" autocomplete="off">
-      <div class="form-label">Amount</div>
-      <div class="amount-range">&#8358;100.00-5,000,000.00</div>
-      <input type="number" class="amount-input" id="transferAmount" min="100" max="5000000" step="any" placeholder="₦100.00-5,000,000.00">
-      <div class="quick-amounts">
-        <button type="button" class="quick-amount-btn" data-amount="500">&#8358;500</button>
-        <button type="button" class="quick-amount-btn" data-amount="1000">&#8358;1,000</button>
-        <button type="button" class="quick-amount-btn" data-amount="2000">&#8358;2,000</button>
-        <button type="button" class="quick-amount-btn" data-amount="5000">&#8358;5,000</button>
-        <button type="button" class="quick-amount-btn" data-amount="10000">&#8358;10,000</button>
-        <button type="button" class="quick-amount-btn" data-amount="20000">&#8358;20,000</button>
-      </div>
-      <div class="form-label-remark">Remark</div>
-      <input type="text" class="remark-input" id="remarkInput" placeholder="What's this for?  (Optional)">
-      <button type="submit" class="green-btn visible" id="confirmBtn" disabled>Confirm</button>
-    </form>
   </div>
-  <!-- Success Screen (Image 4) -->
-  <div id="successScreen" class="app-screen">
-    <span class="done" id="doneBtn">Done</span>
-    <div class="success-section">
-      <div class="success-check">&#10004;</div>
-      <div class="success-message">Transfer successful</div>
-      <div class="success-amount" id="successAmount">&#8358;50.00</div>
-      <div class="action-buttons">
-        <button class="action-btn" id="shareReceiptBtn">
-          <span class="action-btn-icon">&#9675;</span>
-          Share Receipt
-        </button>
-        <button class="action-btn" id="viewDetailsBtn">
-          <span class="action-btn-icon">&#9675;</span>
-          View Details
-        </button>
+  <!-- Success Modal -->
+  <div class="metro-modal-bg" id="metroSuccessModalBg">
+    <div class="metro-modal" id="metroSuccessModal">
+      <div style="position:absolute;top:21px;right:28px;color:#18CFA8;font-size:21px;font-weight:600;cursor:pointer;" onclick="closeMetroModal('metroSuccessModalBg')">Done</div>
+      <div class="metro-success-section">
+        <div class="metro-success-check">&#10004;</div>
+        <div class="metro-success-message">Transfer Successful</div>
+        <div class="metro-success-amount" id="metroSuccessAmount">&#8369;0.00</div>
+        <div class="metro-action-buttons">
+          <button class="metro-action-btn" id="metroShareReceiptBtn">
+            <span class="metro-action-btn-icon">&#9675;</span>
+            Share Receipt
+          </button>
+          <button class="metro-action-btn" id="metroViewDetailsBtn">
+            <span class="metro-action-btn-icon">&#9675;</span>
+            View Details
+          </button>
+        </div>
+      </div>
+      <div style="background:#f4f6fb;border-radius:16px;padding:14px 12px 8px 12px;">
+        <div style="font-size:16px;font-weight:700;color:#0050A2;margin-bottom:13px;">Special Offers For You</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:10px;padding:10px 16px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:23px;background:#e3eefd;border-radius:9px;padding:6px;color:#FFD600;">&#9889;</span>
+            <span style="font-weight:600;color:#0050A2;">Electricity Payment</span>
+          </div>
+          <button style="background:#0050A2;color:#fff;font-size:15px;font-weight:600;border:none;border-radius:13px;padding:7px 22px;cursor:pointer;">GO</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:10px;padding:10px 16px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:23px;background:#e3eefd;border-radius:9px;padding:6px;color:#18CFA8;">&#128181;</span>
+            <span style="font-weight:600;color:#0050A2;">Gcash Top-Up</span>
+          </div>
+          <button style="background:#0050A2;color:#fff;font-size:15px;font-weight:600;border:none;border-radius:13px;padding:7px 22px;cursor:pointer;">GO</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:10px;padding:10px 16px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:23px;background:#e3eefd;border-radius:9px;padding:6px;color:#0050A2;">&#128179;</span>
+            <span style="font-weight:600;color:#0050A2;">Online Shopping</span>
+          </div>
+          <button style="background:#0050A2;color:#fff;font-size:15px;font-weight:600;border:none;border-radius:13px;padding:7px 22px;cursor:pointer;">GO</button>
+        </div>
       </div>
     </div>
-    <div class="bonus-section">
-      <div class="bonus-title">Special Bonus For You</div>
-      <div class="bonus-list">
-        <div class="bonus-item">
-          <div class="bonus-left">
-            <div class="bonus-icon">&#9889;</div>
-            <div class="bonus-info">
-              <span class="bonus-title-item">Electricity Payment</span>
-              <span class="bonus-desc-item">Fast&amp;Easy Electricity Bill Pay</span>
+  </div>
+  <!-- Receipt Modal -->
+  <div class="metro-modal-bg" id="metroReceiptModalBg">
+    <div class="metro-modal" id="metroReceiptModal">
+      <div class="metro-modal-header">
+        <span class="metro-modal-title">Share Receipt</span>
+        <span class="metro-modal-close" onclick="closeMetroModal('metroReceiptModalBg')">&times;</span>
+      </div>
+      <div class="metro-modal-body">
+        <div class="metro-receipt-card">
+          <div class="metro-receipt-logo">Metrobank</div>
+          <div class="metro-receipt-title">Transaction Receipt</div>
+          <div class="metro-receipt-amount" id="receiptAmount">&#8369;0.00</div>
+          <div class="metro-receipt-success">Successful</div>
+          <div class="metro-receipt-date" id="receiptDate"></div>
+          <div class="metro-receipt-details">
+            <div class="metro-receipt-label">Recipient Details</div>
+            <div class="metro-receipt-row">
+              <span class="metro-details-label" id="receiptRecipientName"></span>
+              <span class="metro-details-value" id="receiptRecipientBank"></span>
             </div>
-          </div>
-          <button class="bonus-go-btn">GO</button>
-        </div>
-        <div class="bonus-item">
-          <div class="bonus-left">
-            <div class="bonus-icon dollar">&#128181;</div>
-            <div class="bonus-info">
-              <span class="bonus-title-item">Don't Miss Out</span>
-              <span class="bonus-desc-item">Balance with Daily Interest</span>
+            <div class="metro-receipt-label">Sender Details</div>
+            <div class="metro-receipt-row">
+              <span class="metro-details-label" id="receiptSenderName">JUAN DELA CRUZ</span>
+              <span class="metro-details-value" id="receiptSenderBank">Metrobank | 1234567890</span>
             </div>
+            <div class="metro-receipt-label">Transaction No.</div>
+            <div class="metro-transaction-number" id="receiptTransactionNo"></div>
           </div>
-          <button class="bonus-go-btn">GO</button>
+          <div class="metro-receipt-note">Enjoy a better banking experience with Metrobank. Secure, fast, and always convenient. Insured by PDIC and regulated by BSP.</div>
+          <button class="metro-go-home-btn" id="metroGoHomeBtn">Go Home</button>
         </div>
-        <div class="bonus-item">
-          <div class="bonus-left">
-            <div class="bonus-icon online">&#128179;</div>
-            <div class="bonus-info">
-              <span class="bonus-title-item">Enjoy online payment</span>
-              <span class="bonus-desc-item">Using OPay Verve Card now</span>
-            </div>
-          </div>
-          <button class="bonus-go-btn">GO</button>
-        </div>
-        <div class="bonus-item">
-          <div class="bonus-left">
-            <div class="bonus-icon tv">&#128250;</div>
-            <div class="bonus-info">
-              <span class="bonus-title-item">TV Payment</span>
-              <span class="bonus-desc-item">Reconnect cable TV instantly!</span>
-            </div>
-          </div>
-          <button class="bonus-go-btn">GO</button>
+        <div class="metro-share-section">
+          <button class="metro-share-btn" id="shareImageBtn">&#128247; Share as image</button>
+          <span style="color:#0050A2; font-size:23px;">|</span>
+          <button class="metro-share-btn" id="sharePdfBtn">&#128462; Share as PDF</button>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- Share Receipt Screen (Image 5) -->
-  <div id="shareReceiptScreen" class="app-screen">
-    <div class="header-bar">
-      <span class="back-arrow" id="backToSuccessBtn">&#8592;</span>
-      <span class="title">Share Receipt</span>
-    </div>
-    <div class="receipt-card">
-      <div class="watermark"></div>
-      <div class="opay-logo">OPay</div>
-      <div class="transaction-title">Transaction Receipt</div>
-      <div class="amount-section">
-        <div class="amount-value" id="receiptAmount">&#8358;50.00</div>
-        <div class="amount-success">Successful</div>
-        <div class="amount-date" id="receiptDate">Jul 30th, 2025 06:05:59</div>
-      </div>
-      <div class="receipt-details">
-        <div class="receipt-label">Recipient Details</div>
-        <div class="receipt-row">
-          <span class="details-label" id="recipientName">EBENEZER UCHENDU</span>
-          <span class="details-value" id="recipientBank">OPay | 808 699 8884</span>
-        </div>
-        <div class="receipt-label">Sender Details</div>
-        <div class="receipt-row">
-          <span class="details-label" id="senderName">VICTORIA UCHENDU</span>
-          <span class="details-value" id="senderBank">OPay | 916****340</span>
-        </div>
-        <div class="receipt-label">Transaction No.</div>
-        <div class="transaction-number" id="transactionNo">250730010100120955541473</div>
-      </div>
-      <div class="receipt-note">
-        Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest On your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.
-      </div>
-      <button class="go-home-btn" id="goHomeBtn">Go Home</button>
-    </div>
-    <div class="share-section">
-      <button class="share-btn" id="shareImageBtn">
-        <img src="https://cdn-icons-png.flaticon.com/512/32/32213.png" alt="Share as image">
-        Share as image
-      </button>
-      <span style="color:#18CFA8; font-size:28px;">|</span>
-      <button class="share-btn" id="sharePdfBtn">
-        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Share as PDF">
-        Share as PDF
-      </button>
     </div>
   </div>
   <script>
-    // State Management
-    let balance = 12000000.00;
-    let transactions = [];
-    let userName = "VICTORIA UCHENDU";
-    let senderBank = "OPay | 916****340";
-    let userBank = "OPay";
-    let userBankAcc = "6100684620";
-    let transferBank = "";
-    let transferAccountNum = "";
-    let transferAccountName = "";
-    let transferAmount = 0;
-    let transferRemark = "";
-    let transactionNo = "";
-    let txDate = "";
-    // Navigation
-    function showScreen(id) {
-      document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    // App state
+    let metroBalance = 12000000.00;
+    let userName = "JUAN DELA CRUZ";
+    let userAccountNo = "1234567890";
+    let userBank = "Metrobank";
+    let transferHistory = [];
+    let transferData = {
+      recipientAccountNumber: "",
+      recipientBank: "",
+      recipientName: "",
+      amount: 0,
+      remark: "",
+      transactionNo: "",
+      date: "",
+    };
+
+    // Transaction history rendering
+    function renderMetroHistory() {
+      const ul = document.getElementById('metroHistoryList');
+      ul.innerHTML = '';
+      transferHistory.forEach(tx => {
+        const li = document.createElement('li');
+        li.className = 'metro-history-item';
+        li.innerHTML = `
+          <span>
+            <span class="metro-history-bank">${tx.recipientBank}</span>
+            <span>${tx.recipientName}</span>
+            <span class="metro-history-date">${tx.date}</span>
+          </span>
+          <span>
+            <span class="metro-history-amount">&#8369;${parseFloat(tx.amount).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}</span>
+          </span>
+        `;
+        ul.appendChild(li);
+      });
     }
-    // Home to Withdraw
-    document.getElementById('withdrawBtn').onclick = function() {
-      showScreen('transferBankScreen');
-    };
-    // Withdraw Flow
-    document.getElementById('backToHomeBtn').onclick = function() {
-      showScreen('homeScreen');
-    };
-    // Bank Transfer Form Logic
-    const accountNumber = document.getElementById('accountNumber');
-    const bankSelect = document.getElementById('bankSelect');
-    const nextBtn = document.getElementById('nextBtn');
-    const nameSection = document.getElementById('nameSection');
-    const finalNextBtn = document.getElementById('finalNextBtn');
-    let readyForNext = false;
+
+    // Update balance
+    function updateMetroBalance() {
+      document.getElementById('metroBalanceAmount').textContent =
+        `₱${metroBalance.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    }
+
+    // Show/hide modals
+    function showTransferModal() {
+      document.getElementById('metroTransferModalBg').style.display = 'flex';
+      // Reset
+      document.getElementById('recipientAccountNumber').value = '';
+      document.getElementById('recipientBankSelect').selectedIndex = 0;
+      document.getElementById('metroNextBtn').classList.remove('visible');
+      document.getElementById('metroNameSection').style.display = 'none';
+      document.getElementById('recipientNameInput').value = '';
+    }
+    function closeMetroModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    // Transfer modal logic
+    const accountInput = document.getElementById('recipientAccountNumber');
+    const bankSelect = document.getElementById('recipientBankSelect');
+    const nextBtn = document.getElementById('metroNextBtn');
     function showNextButton() {
-      if (accountNumber.value.length === 10 && bankSelect.value) {
+      if (accountInput.value.length === 10 && bankSelect.value) {
         nextBtn.classList.add('visible');
-        readyForNext = true;
       } else {
         nextBtn.classList.remove('visible');
-        readyForNext = false;
       }
     }
-    accountNumber.addEventListener('input', showNextButton);
+    accountInput.addEventListener('input', showNextButton);
     bankSelect.addEventListener('change', showNextButton);
+
     nextBtn.addEventListener('click', function() {
-      if (readyForNext) {
-        transferBank = bankSelect.options[bankSelect.selectedIndex].text;
-        transferAccountNum = accountNumber.value;
-        nameSection.style.display = 'block';
+      if (accountInput.value.length === 10 && bankSelect.value) {
+        document.getElementById('metroNameSection').style.display = 'block';
         nextBtn.style.display = 'none';
-        accountNumber.disabled = true;
+        accountInput.disabled = true;
         bankSelect.disabled = true;
       }
     });
-    finalNextBtn.addEventListener('click', function() {
-      transferAccountName = document.getElementById('accountName').value || "Account Name";
-      document.getElementById('accountDisplayTitle').textContent = transferAccountName;
-      document.getElementById('accountDisplayDesc').textContent = transferAccountNum + " " + transferBank;
-      document.getElementById('accountBankLogo').textContent = transferBank === "OPay" ? "O" : transferBank.charAt(0).toUpperCase();
-      showScreen('transferAmountScreen');
-    });
-    // Amount Entry Logic
-    const amountInput = document.getElementById('transferAmount');
-    const quickAmountBtns = document.querySelectorAll('.quick-amount-btn');
-    const confirmBtn = document.getElementById('confirmBtn');
-    const amountForm = document.getElementById('amountForm');
-    function validateAmount() {
-      const val = parseFloat(amountInput.value);
-      if (!isNaN(val) && val >= 100 && val <= 5000000) {
-        confirmBtn.disabled = false;
-      } else {
-        confirmBtn.disabled = true;
+
+    document.getElementById('metroNameNextBtn').addEventListener('click', function() {
+      const nameInput = document.getElementById('recipientNameInput');
+      if (nameInput.value.trim().length > 0) {
+        transferData.recipientAccountNumber = accountInput.value;
+        transferData.recipientBank = bankSelect.value;
+        transferData.recipientName = nameInput.value.trim();
+        closeMetroModal('metroTransferModalBg');
+        showAmountModal();
       }
+    });
+
+    // Amount modal logic
+    function showAmountModal() {
+      document.getElementById('metroAmountModalBg').style.display = 'flex';
+      document.getElementById('metroAmountInput').value = '';
+      document.getElementById('metroRemarkInput').value = '';
+      document.getElementById('metroConfirmBtn').disabled = true;
+      document.querySelectorAll('.metro-amount-btn').forEach(b => b.classList.remove('selected'));
     }
-    amountInput.addEventListener('input', validateAmount);
-    quickAmountBtns.forEach(btn => {
+    document.getElementById('metroAmountInput').addEventListener('input', function() {
+      const val = parseFloat(this.value);
+      document.getElementById('metroConfirmBtn').disabled = !(val >= 100 && val <= 5000000);
+    });
+    document.querySelectorAll('.metro-amount-btn').forEach(btn => {
       btn.addEventListener('click', function() {
-        quickAmountBtns.forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.metro-amount-btn').forEach(b => b.classList.remove('selected'));
         this.classList.add('selected');
-        amountInput.value = this.getAttribute('data-amount');
-        validateAmount();
+        document.getElementById('metroAmountInput').value = this.getAttribute('data-amount');
+        document.getElementById('metroConfirmBtn').disabled = false;
       });
     });
-    amountForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      transferAmount = parseFloat(amountInput.value);
-      transferRemark = document.getElementById('remarkInput').value;
-      showScreen('successScreen');
-      setSuccessData();
-      updateBalanceAndTxHistory();
+    document.getElementById('metroConfirmBtn').addEventListener('click', function() {
+      const amount = parseFloat(document.getElementById('metroAmountInput').value);
+      if (amount >= 100 && amount <= 5000000) {
+        transferData.amount = amount;
+        transferData.remark = document.getElementById('metroRemarkInput').value;
+        transferData.transactionNo = generateTransactionNo();
+        transferData.date = (new Date()).toLocaleString('en-PH',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+        closeMetroModal('metroAmountModalBg');
+        showSuccessModal();
+      }
     });
-    document.getElementById('backToBankBtn').onclick = function() {
-      showScreen('transferBankScreen');
-    };
-    // Success Screen Logic
-    function setSuccessData() {
-      document.getElementById('successAmount').textContent = "₦" + transferAmount.toLocaleString('en-NG', {minimumFractionDigits: 2});
+    function generateTransactionNo() {
+      return Math.floor(Math.random() * 1e16).toString();
     }
-    document.getElementById('doneBtn').onclick = function() {
-      showScreen('homeScreen');
-    };
-    document.getElementById('shareReceiptBtn').onclick = function() {
-      setReceiptData();
-      showScreen('shareReceiptScreen');
-    };
-    document.getElementById('viewDetailsBtn').onclick = function() {
-      setReceiptData();
-      showScreen('shareReceiptScreen');
-    };
-    // Share Receipt Logic
-    function setReceiptData() {
-      document.getElementById('receiptAmount').textContent = "₦" + transferAmount.toLocaleString('en-NG', {minimumFractionDigits: 2});
-      document.getElementById('recipientName').textContent = transferAccountName;
-      document.getElementById('recipientBank').textContent = transferBank + " | " + transferAccountNum.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
-      document.getElementById('senderName').textContent = userName;
-      document.getElementById('senderBank').textContent = senderBank;
-      transactionNo = Date.now() + Math.floor(Math.random()*1000000);
-      document.getElementById('transactionNo').textContent = transactionNo;
-      txDate = new Date().toLocaleString('en-NG', {year:'numeric',month:'short',day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
-      document.getElementById('receiptDate').textContent = txDate;
+
+    // Success modal
+    function showSuccessModal() {
+      document.getElementById('metroSuccessModalBg').style.display = 'flex';
+      document.getElementById('metroSuccessAmount').textContent =
+        `₱${parseFloat(transferData.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+      // update balance and history
+      metroBalance -= transferData.amount;
+      transferHistory.unshift({...transferData});
+      updateMetroBalance();
+      renderMetroHistory();
     }
-    document.getElementById('backToSuccessBtn').onclick = function() {
-      showScreen('successScreen');
+    document.getElementById('metroShareReceiptBtn').onclick = function() {
+      closeMetroModal('metroSuccessModalBg');
+      showReceiptModal();
     };
-    document.getElementById('goHomeBtn').onclick = function() {
-      showScreen('homeScreen');
+    document.getElementById('metroViewDetailsBtn').onclick = function() {
+      closeMetroModal('metroSuccessModalBg');
+      showReceiptModal();
+    };
+
+    // Receipt modal logic
+    function showReceiptModal() {
+      document.getElementById('metroReceiptModalBg').style.display = 'flex';
+      document.getElementById('receiptAmount').textContent =
+        `₱${parseFloat(transferData.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+      document.getElementById('receiptRecipientName').textContent = transferData.recipientName;
+      document.getElementById('receiptRecipientBank').textContent =
+        `${transferData.recipientBank} | ${transferData.recipientAccountNumber}`;
+      document.getElementById('receiptTransactionNo').textContent = transferData.transactionNo;
+      document.getElementById('receiptDate').textContent = transferData.date;
+    }
+    document.getElementById('metroGoHomeBtn').onclick = function() {
+      closeMetroModal('metroReceiptModalBg');
     };
     document.getElementById('shareImageBtn').onclick = function() {
-      alert('Share receipt as image to apps.');
+      alert('Share as image to apps.');
     };
     document.getElementById('sharePdfBtn').onclick = function() {
-      alert('Share receipt as PDF to apps.');
+      alert('Share as PDF to apps.');
     };
-    // Watermark rendering for receipt
-    (function(){
-      var watermark = document.querySelector('.watermark');
-      var txt = '';
-      for(let i=0;i<40;i++) {
-        txt += '<span style="font-size:32px;font-weight:700;color:#fff;opacity:.15;margin:0 18px;">OPay</span>';
-      }
-      watermark.innerHTML = txt;
-    })();
-    // Transaction History
-    function updateBalanceAndTxHistory() {
-      balance -= transferAmount;
-      document.getElementById('availableBalance').textContent = "₦" + balance.toLocaleString('en-NG', {minimumFractionDigits: 2});
-      transactions.push({
-        amount: transferAmount,
-        date: txDate,
-        bank: transferBank + " | " + transferAccountNum,
-        receiver: transferAccountName,
-        remark: transferRemark,
-        txid: transactionNo
-      });
-    }
-    document.getElementById('showTxHistoryBtn').onclick = function() {
-      document.getElementById('txHistoryPanel').style.display = 'flex';
-      renderTxHistory();
-    };
-    document.getElementById('txCloseBtn').onclick = function() {
-      document.getElementById('txHistoryPanel').style.display = 'none';
-    };
-    function renderTxHistory() {
-      let txList = document.getElementById('txList');
-      txList.innerHTML = "";
-      if(transactions.length === 0) {
-        txList.innerHTML = "<div style='color:#fff;font-size:18px;'>No transfer records yet.</div>";
-      } else {
-        transactions.slice().reverse().forEach(tx => {
-          txList.innerHTML += `
-            <div class="tx-item">
-              <div class="tx-row">
-                <span class="tx-amount">₦${tx.amount.toLocaleString('en-NG', {minimumFractionDigits: 2})}</span>
-                <span class="tx-bank">${tx.bank}</span>
-              </div>
-              <div class="tx-row">
-                <span>To: ${tx.receiver}</span>
-                <span class="tx-date">${tx.date}</span>
-              </div>
-              <div class="tx-row">
-                <span>Remark: ${tx.remark || 'None'}</span>
-                <span>TxID: ${tx.txid}</span>
-              </div>
-            </div>
-          `;
-        });
-      }
-    }
-    // App Start
-    showScreen('homeScreen');
+
+    // Initial rendering
+    updateMetroBalance();
+    renderMetroHistory();
   </script>
 </body>
 </html>
