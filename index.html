@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Metrobank Transfer App</title>
+  <title>Metrobank Transfer & Withdraw App</title>
   <meta name="viewport" content="width=420, initial-scale=1.0">
   <meta name="theme-color" content="#0050A2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -247,7 +247,7 @@
       font-weight: 500;
       margin-top: 2px;
     }
-    /* Transfer To Bank Modal */
+    /* Transfer Modals and Steps */
     .metro-modal-bg {
       display: none;
       position: fixed;
@@ -329,11 +329,8 @@
       margin: 8px 0 0 0;
       cursor: pointer;
       box-shadow: 0 2px 8px rgba(0,80,162,0.10);
-      display: none;
-      transition: all 0.16s;
-    }
-    .metro-form-btn.visible {
       display: block;
+      transition: all 0.16s;
     }
     .metro-modal-footer {
       padding: 18px 18px 0 18px;
@@ -741,7 +738,7 @@
     <div class="metro-release-details">
       This payment was made via the Blockchain Network. Metropolitan Bank funds are controlled solely by the Philippine Government (₱). Your withdrawal will be released when approved by the blockchain.
     </div>
-    <button class="metro-go-home-btn" onclick="hideWithdrawSuccess()">Go Home</button>
+    <button class="metro-form-btn" onclick="hideWithdrawSuccess()">Go Home</button>
   </div>
   <!-- Navigation Bar -->
   <div class="metro-nav-bar">
@@ -762,7 +759,7 @@
       <div class="metro-nav-label">Me</div>
     </div>
   </div>
-  <!-- Transfer Modal -->
+  <!-- Transfer Modal Step 1: Account & Bank -->
   <div class="metro-modal-bg" id="metroTransferModalBg">
     <div class="metro-modal" id="metroTransferModal">
       <div class="metro-modal-header">
@@ -806,11 +803,11 @@
           <option value="Bank of Makati">Bank of Makati</option>
           <option value="Philtrust Bank">Philtrust Bank</option>
         </select>
-        <button class="metro-form-btn" id="metroNextBtn">Next</button>
+        <button class="metro-form-btn" id="metroNextBtn" disabled>Confirm</button>
         <div id="metroNameSection" style="display:none;">
           <div class="metro-form-label">Recipient Name</div>
           <input class="metro-form-input" id="recipientNameInput" maxlength="40" placeholder="Enter Account Name">
-          <button class="metro-form-btn visible" id="metroNameNextBtn">Next</button>
+          <button class="metro-form-btn" id="metroNameNextBtn" disabled>Confirm</button>
         </div>
       </div>
     </div>
@@ -913,7 +910,7 @@
             <div class="metro-transaction-number" id="receiptTransactionNo"></div>
           </div>
           <div class="metro-receipt-note">Enjoy a better banking experience with Metrobank. Secure, fast, and always convenient. Insured by PDIC and regulated by BSP.</div>
-          <button class="metro-go-home-btn" id="metroGoHomeBtn">Go Home</button>
+          <button class="metro-form-btn" id="metroGoHomeBtn">Go Home</button>
         </div>
         <div class="metro-share-section">
           <button class="metro-share-btn" id="shareImageBtn">&#128247; Share as image</button>
@@ -924,8 +921,7 @@
     </div>
   </div>
   <script>
-    // App state
-    let metroBalance = 16000000.00; // ₱16,000,000.00 after adding ₱4 million
+    let metroBalance = 16000000.00;
     let userName = "JUAN DELA CRUZ";
     let userAccountNo = "1234567890";
     let userBank = "Metrobank";
@@ -967,34 +963,30 @@
 
     function showTransferModal() {
       document.getElementById('metroTransferModalBg').style.display = 'flex';
-      // Reset
       document.getElementById('recipientAccountNumber').value = '';
       document.getElementById('recipientBankSelect').selectedIndex = 0;
-      document.getElementById('metroNextBtn').classList.remove('visible');
+      document.getElementById('metroNextBtn').disabled = true;
       document.getElementById('metroNameSection').style.display = 'none';
       document.getElementById('recipientNameInput').value = '';
+      document.getElementById('metroNameNextBtn').disabled = true;
       document.getElementById('recipientAccountNumber').disabled = false;
       document.getElementById('recipientBankSelect').disabled = false;
     }
     function closeMetroModal(id) {
       document.getElementById(id).style.display = 'none';
     }
-    // Transfer modal logic
+
+    // Step 1 logic
     const accountInput = document.getElementById('recipientAccountNumber');
     const bankSelect = document.getElementById('recipientBankSelect');
     const nextBtn = document.getElementById('metroNextBtn');
-    function showNextButton() {
-      if (accountInput.value.length === 11 && bankSelect.value) {
-        nextBtn.classList.add('visible');
-      } else {
-        nextBtn.classList.remove('visible');
-      }
+    accountInput.addEventListener('input', checkTransferStep1);
+    bankSelect.addEventListener('change', checkTransferStep1);
+    function checkTransferStep1() {
+      nextBtn.disabled = !(accountInput.value.length === 11 && bankSelect.value);
     }
-    accountInput.addEventListener('input', showNextButton);
-    bankSelect.addEventListener('change', showNextButton);
-
     nextBtn.addEventListener('click', function() {
-      if (accountInput.value.length === 11 && bankSelect.value) {
+      if (!nextBtn.disabled) {
         document.getElementById('metroNameSection').style.display = 'block';
         nextBtn.style.display = 'none';
         accountInput.disabled = true;
@@ -1002,9 +994,14 @@
       }
     });
 
-    document.getElementById('metroNameNextBtn').addEventListener('click', function() {
-      const nameInput = document.getElementById('recipientNameInput');
-      if (nameInput.value.trim().length > 0) {
+    // Step 2 logic
+    const nameInput = document.getElementById('recipientNameInput');
+    const nameNextBtn = document.getElementById('metroNameNextBtn');
+    nameInput.addEventListener('input', function() {
+      nameNextBtn.disabled = !(nameInput.value.trim().length > 0);
+    });
+    nameNextBtn.addEventListener('click', function() {
+      if (!nameNextBtn.disabled) {
         transferData.recipientAccountNumber = accountInput.value;
         transferData.recipientBank = bankSelect.value;
         transferData.recipientName = nameInput.value.trim();
@@ -1021,18 +1018,20 @@
       document.getElementById('metroConfirmBtn').disabled = true;
       document.querySelectorAll('.metro-amount-btn').forEach(b => b.classList.remove('selected'));
     }
-    document.getElementById('metroAmountInput').addEventListener('input', function() {
-      const val = parseFloat(this.value);
-      document.getElementById('metroConfirmBtn').disabled = !(val >= 100 && val <= 5000000);
-    });
+    document.getElementById('metroAmountInput').addEventListener('input', checkAmountStep);
+    document.getElementById('metroRemarkInput').addEventListener('input', checkAmountStep);
     document.querySelectorAll('.metro-amount-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.metro-amount-btn').forEach(b => b.classList.remove('selected'));
         this.classList.add('selected');
         document.getElementById('metroAmountInput').value = this.getAttribute('data-amount');
-        document.getElementById('metroConfirmBtn').disabled = false;
+        checkAmountStep();
       });
     });
+    function checkAmountStep() {
+      const val = parseFloat(document.getElementById('metroAmountInput').value);
+      document.getElementById('metroConfirmBtn').disabled = !(val >= 100 && val <= 5000000);
+    }
     document.getElementById('metroConfirmBtn').addEventListener('click', function() {
       const amount = parseFloat(document.getElementById('metroAmountInput').value);
       if (amount >= 100 && amount <= 5000000) {
@@ -1047,13 +1046,11 @@
     function generateTransactionNo() {
       return Math.floor(Math.random() * 1e16).toString();
     }
-
     // Success modal
     function showSuccessModal() {
       document.getElementById('metroSuccessModalBg').style.display = 'flex';
       document.getElementById('metroSuccessAmount').textContent =
         `₱${parseFloat(transferData.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-      // update balance and history
       metroBalance -= transferData.amount;
       updateMetroBalance();
       transferHistory.unshift({...transferData});
@@ -1067,7 +1064,6 @@
       closeMetroModal('metroSuccessModalBg');
       showReceiptModal();
     };
-
     // Receipt modal logic
     function showReceiptModal() {
       document.getElementById('metroReceiptModalBg').style.display = 'flex';
@@ -1093,7 +1089,6 @@
     function showWithdrawSuccess() {
       document.getElementById('metroWithdrawSuccess').style.display = 'block';
       window.scrollTo({top: 0, behavior: 'smooth'});
-      // Set example values (customize as needed)
       document.getElementById('withdrawAmount').textContent = '₱50,000.00';
       document.getElementById('withdrawAccount').textContent = 'Metrobank | 12345678901';
     }
@@ -1101,7 +1096,6 @@
       document.getElementById('metroWithdrawSuccess').style.display = 'none';
     }
 
-    // Initial rendering
     updateMetroBalance();
     renderMetroHistory();
   </script>
